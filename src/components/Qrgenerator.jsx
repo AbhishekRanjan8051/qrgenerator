@@ -10,11 +10,12 @@ const QrGenerator = () => {
   };
 
   const generateQRCode = (data) => {
+    console.log(">>>",data)
     const qrCodeDataUrl = document
       .querySelector("canvas")
-      .toDataURL("image/png");
-    const qrCodeImage = new Image();
-    qrCodeImage.src = qrCodeDataUrl;
+      .toDataURL("image/png").replace("image/png", "image/octet-stream");
+    // const qrCodeImage = new Image();
+    // qrCodeImage.src = qrCodeDataUrl;
     const qrCodeDownloadLink = document.createElement("a");
     qrCodeDownloadLink.href = qrCodeDataUrl;
     qrCodeDownloadLink.download = "qrcode.png";
@@ -39,7 +40,7 @@ const QrGenerator = () => {
         <QRCode value={data} style={{ margin: "auto" }} />
         <br />
         {data && (
-          <Button onClick={() => generateQRCode(data)}>Download QR Code</Button>
+          <Button onClick={() => generateQRCode(data)}>Download QR</Button>
         )}
       </Card>
     </div>
